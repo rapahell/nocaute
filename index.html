@@ -1,1 +1,1269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barbearia Nocaute — Goiânia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@700&family=Barlow:wght@300;400;500&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #000000;
+    --white: #ffffff;
+    --gray-dark: #111111;
+    --gray-mid: #1a1a1a;
+    --gray-light: #2a2a2a;
+    --gray-text: #888888;
+    --gray-line: #333333;
+    --accent: #c8a96e;
+  }
 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--gray-line); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: all 0.4s;
+  }
+
+  .nav-logo {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 400;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray-text);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--white);
+    padding: 0.6rem 1.4rem;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .nav-cta:hover {
+    background: var(--accent);
+    color: var(--black);
+  }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--black);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255,255,255,0.015) 2px,
+        rgba(255,255,255,0.015) 4px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 60px,
+        rgba(255,255,255,0.01) 60px,
+        rgba(255,255,255,0.01) 61px
+      );
+  }
+
+  .hero-fachada {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.85) 100%),
+                url('https://res.cloudinary.com/dnnnn7njk/image/upload/v1786474772/header_nocaute_vbn1hu.jpg') center/cover no-repeat;
+    opacity: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.3rem;
+    margin-top: 58vh;
+    animation: fadeUp 1.2s ease both;
+  }
+
+  .hero-separator {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--white), transparent);
+  }
+
+  .hero-tagline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 300;
+    font-size: 0.75rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gray-text);
+  }
+
+  .hero-cta {
+    margin-top: 1rem;
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--white);
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+  }
+
+  .hero-cta:hover::before { transform: translateX(0); }
+  .hero-cta span { position: relative; z-index: 1; }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    animation: bounceRight 2s infinite;
+  }
+
+  .hero-scroll span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gray-text);
+  }
+
+  .hero-scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(180deg, var(--gray-text), transparent);
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 7rem 0; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gray-text);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.1;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--white);
+    margin-bottom: 3rem;
+  }
+
+  /* ── SOBRE ── */
+  #sobre {
+    border-top: 1px solid var(--gray-line);
+    background: var(--gray-dark);
+  }
+
+  .sobre-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .sobre-text p {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: #aaaaaa;
+    margin-bottom: 1.5rem;
+  }
+
+  .sobre-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--gray-line);
+  }
+
+  .stat-item {
+    padding: 2.5rem 2rem;
+    border-right: 1px solid var(--gray-line);
+    border-bottom: 1px solid var(--gray-line);
+    text-align: center;
+  }
+
+  .stat-item:nth-child(2n) { border-right: none; }
+  .stat-item:nth-last-child(-n+2) { border-bottom: none; }
+
+  .stat-number {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--white);
+    display: block;
+  }
+
+  .stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gray-text);
+    margin-top: 0.5rem;
+    display: block;
+  }
+
+  /* ── SERVIÇOS / CHIPS ── */
+  #servicos { background: var(--black); }
+
+  .cat-block { margin-bottom: 3rem; }
+  .cat-block:last-child { margin-bottom: 0; }
+
+  .cat-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .cat-name {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .cat-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(200,169,110,0.35), transparent);
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+  }
+
+  .chip {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    color: #cccccc;
+    border: 1px solid var(--gray-line);
+    padding: 0.6rem 1.2rem;
+    background: rgba(255,255,255,0.02);
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+
+  .chip:hover {
+    color: var(--black);
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .chip.featured {
+    color: var(--accent);
+    border-color: var(--accent);
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    background: rgba(200,169,110,0.08);
+  }
+
+  .chip.featured:hover {
+    color: var(--black);
+    background: var(--accent);
+  }
+
+  .servicos-cta {
+    margin-top: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    border-top: 1px solid var(--gray-line);
+    padding-top: 2.5rem;
+  }
+
+  .servicos-cta-text {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.95rem;
+    color: #999999;
+    max-width: 420px;
+    line-height: 1.7;
+  }
+
+  .servicos-cta-btn {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--white);
+    padding: 0.9rem 2rem;
+    text-decoration: none;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+
+  .servicos-cta-btn:hover {
+    background: var(--accent);
+  }
+
+  /* ── PROFISSIONAIS ── */
+  #profissionais {
+    background: var(--gray-dark);
+    border-top: 1px solid var(--gray-line);
+  }
+
+  .profissionais-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .profissional-card {
+    border: 1px solid var(--gray-line);
+    position: relative;
+    overflow: hidden;
+    background: var(--black);
+    transition: border-color 0.3s;
+  }
+
+  .profissional-card:hover { border-color: rgba(255,255,255,0.3); }
+
+  .profissional-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.1);
+    display: block;
+    background: var(--gray-light);
+  }
+
+  .profissional-img-placeholder {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--gray-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .profissional-img-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 10px,
+      rgba(255,255,255,0.03) 10px,
+      rgba(255,255,255,0.03) 11px
+    );
+  }
+
+  .profissional-placeholder-icon {
+    font-size: 4rem;
+    opacity: 0.15;
+    filter: grayscale(1);
+  }
+
+  .profissional-info {
+    padding: 2rem;
+    border-top: 1px solid var(--gray-line);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .profissional-nome {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+  }
+
+  .profissional-cargo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gray-text);
+  }
+
+  .profissional-badge {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--gray-line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--gray-text);
+    flex-shrink: 0;
+  }
+
+  /* ── GALERIA ── */
+  #galeria { background: var(--black); }
+
+  .galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 200px);
+    grid-template-areas:
+      "vid vid a b"
+      "vid vid c d"
+      "e   e   f f";
+    gap: 3px;
+  }
+
+  .galeria-item {
+    position: relative;
+    overflow: hidden;
+    background: var(--gray-mid);
+    cursor: pointer;
+  }
+
+  .g-vid { grid-area: vid; }
+  .g-a { grid-area: a; }
+  .g-b { grid-area: b; }
+  .g-c { grid-area: c; }
+  .g-d { grid-area: d; }
+  .g-e { grid-area: e; }
+  .g-f { grid-area: f; }
+
+  .galeria-item img,
+  .galeria-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.1);
+    transition: transform 0.6s ease, filter 0.4s;
+    display: block;
+  }
+
+  .galeria-item:hover img,
+  .galeria-item:hover video {
+    transform: scale(1.05);
+    filter: grayscale(0.3) contrast(1.1);
+  }
+
+  .g-vid video { filter: grayscale(0.15) contrast(1.05); }
+  .g-vid:hover video { filter: grayscale(0) contrast(1.05); }
+
+  .g-vid-badge {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    z-index: 2;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(4px);
+    padding: 0.4rem 0.8rem;
+    border: 1px solid rgba(255,255,255,0.15);
+    pointer-events: none;
+  }
+
+  /* ── AGENDAR ── */
+  #agendar {
+    background: var(--white);
+    color: var(--black);
+    text-align: center;
+    padding: 8rem 0;
+  }
+
+  #agendar .section-title { color: var(--black); }
+  #agendar .section-label { color: #666; }
+  #agendar .section-divider { background: var(--black); margin: 0 auto 3rem; }
+
+  .agendar-desc {
+    font-family: 'Barlow', sans-serif;
+    font-size: 1rem;
+    color: #555;
+    max-width: 480px;
+    margin: 0 auto 3rem;
+    line-height: 1.8;
+  }
+
+  .agendar-btn {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--black);
+    padding: 1.2rem 3rem;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: 2px solid var(--black);
+  }
+
+  .agendar-btn:hover {
+    background: transparent;
+    color: var(--black);
+  }
+
+  /* ── CONTATO ── */
+  #contato {
+    background: var(--gray-dark);
+    border-top: 1px solid var(--gray-line);
+  }
+
+  .contato-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .contato-info-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    margin-bottom: 2.5rem;
+  }
+
+  .contato-icon {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--gray-line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.9rem;
+    opacity: 0.6;
+  }
+
+  .contato-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gray-text);
+    margin-bottom: 0.3rem;
+  }
+
+  .contato-value {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.95rem;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .contato-value:hover { color: var(--gray-text); }
+
+  .mapa-container {
+    border: 1px solid var(--gray-line);
+    overflow: hidden;
+    height: 320px;
+  }
+
+  .mapa-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    filter: grayscale(1) invert(0.85) contrast(0.9);
+  }
+
+  /* ── HORÁRIO STRIP ── */
+  .horario-strip {
+    border: 1px solid var(--gray-line);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 3rem;
+  }
+
+  .horario-item {
+    padding: 1.5rem;
+    border-right: 1px solid var(--gray-line);
+    text-align: center;
+  }
+
+  .horario-item:last-child { border-right: none; }
+
+  .horario-dia {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--white);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .horario-hora {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    color: var(--gray-text);
+    display: block;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    border-top: 1px solid var(--gray-line);
+    padding: 0;
+  }
+
+  .footer-trust {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 2.8rem 0;
+    border-bottom: 1px solid var(--gray-line);
+  }
+
+  .trust-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 3rem;
+    text-align: center;
+  }
+
+  .trust-item + .trust-item,
+  .trust-badge {
+    border-left: 1px solid var(--gray-line);
+  }
+
+  .trust-stars {
+    color: var(--accent);
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+  }
+
+  .trust-score {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .trust-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gray-text);
+  }
+
+  .trust-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0 3rem;
+    text-align: center;
+  }
+
+  .trust-badge-seal {
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--accent);
+  }
+
+  .trust-badge-text {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    max-width: 150px;
+    line-height: 1.5;
+  }
+
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2.5rem 0;
+  }
+
+  .footer-brand {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: var(--gray-text);
+  }
+
+  .footer-copy {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--gray-line);
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .footer-social a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray-text);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .footer-social a:hover { color: var(--white); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  @keyframes bounceRight {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── MOBILE MENU ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 5px;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--white);
+    transition: all 0.3s;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+
+    .sobre-grid,
+    .contato-grid,
+    .profissionais-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+    .servicos-cta { flex-direction: column; align-items: flex-start; }
+
+    .galeria-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: none;
+      grid-template-areas: none;
+      grid-auto-rows: 150px;
+    }
+    .g-vid, .g-a, .g-b, .g-c, .g-d, .g-e, .g-f { grid-area: auto; }
+    .g-vid { grid-column: span 2; grid-row: span 2; }
+
+    .horario-strip { grid-template-columns: 1fr; }
+    .horario-item { border-right: none; border-bottom: 1px solid var(--gray-line); }
+    .horario-item:last-child { border-bottom: none; }
+
+    .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
+
+    .footer-trust { flex-direction: column; gap: 2rem; padding: 2.2rem 0; }
+    .trust-item, .trust-badge { padding: 0; }
+    .trust-item + .trust-item, .trust-badge { border-left: none; }
+
+    section { padding: 5rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <img src="https://res.cloudinary.com/dnnnn7njk/image/upload/v1777581064/logo_swyxb8.png" alt="Barbearia Nocaute" style="height:36px; display:block;">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#profissionais">Equipe</a></li>
+    <li><a href="#galeria">Galeria</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <a href="https://booksy.com/pt-br/125221_barbearia-nocaute_barbearias_392563_goiania" target="_blank" class="nav-cta">Agendar</a>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-fachada"></div>
+  <div class="hero-content">
+    <div class="hero-separator"></div>
+    <p class="hero-tagline">Setor Bueno · Goiânia</p>
+    <a href="https://booksy.com/pt-br/125221_barbearia-nocaute_barbearias_392563_goiania" target="_blank" class="hero-cta">
+      <span>Agendar Horário</span>
+    </a>
+  </div>
+  <div class="hero-scroll">
+    <span>Desça</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="sobre-text reveal">
+        <p class="section-label">// Nossa História</p>
+        <h2 class="section-title">Corte que<br>Dá Nocaute</h2>
+        <div class="section-divider"></div>
+        <p>A Barbearia Nocaute nasceu com uma missão simples: elevar o padrão do cuidado masculino em Goiânia. Num espaço que respira tradição e técnica, cada atendimento é um ritual de precisão.</p>
+        <p>Do corte clássico ao acabamento impecável, aqui você não sai do jeito que entrou. Sai melhor.</p>
+      </div>
+      <div class="sobre-fachada reveal">
+        <img
+          src="https://res.cloudinary.com/dnnnn7njk/image/upload/v1785524312/eedd38c6-be30-4a9f-87ea-9e1daa962153.png"
+          alt="Fachada Barbearia Nocaute"
+          style="width:100%; height:440px; object-fit:cover; filter:grayscale(1) contrast(1.05); display:block; border:1px solid var(--gray-line);"
+        >
+        <div style="border:1px solid var(--gray-line); border-top:none; padding:1rem 1.5rem; display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.6rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gray-text);">Av. T-8, 657 — Setor Bueno</span>
+          <span style="font-family:'Cinzel',serif; font-size:0.65rem; color:var(--white);">Goiânia — GO</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">// Especialidades</p>
+      <h2 class="section-title">Serviços</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="cat-block reveal">
+      <div class="cat-head">
+        <span class="cat-name">Cortes</span>
+        <span class="cat-line"></span>
+      </div>
+      <div class="chips">
+        <span class="chip">Corte</span>
+        <span class="chip">Corte Máquina Raspado</span>
+        <span class="chip">Pé de Cabelo</span>
+        <span class="chip">Penteado (Escova)</span>
+        <span class="chip">Higienização</span>
+      </div>
+    </div>
+    <div class="cat-block reveal">
+      <div class="cat-head">
+        <span class="cat-name">Barba & Sobrancelha</span>
+        <span class="cat-line"></span>
+      </div>
+      <div class="chips">
+        <span class="chip">Barba</span>
+        <span class="chip">Sobrancelha na Navalha</span>
+      </div>
+    </div>
+    <div class="cat-block reveal">
+      <div class="cat-head">
+        <span class="cat-name">Química & Tratamento</span>
+        <span class="cat-line"></span>
+      </div>
+      <div class="chips">
+        <span class="chip">Selagem</span>
+        <span class="chip">Botox</span>
+        <span class="chip">Couver Pintura</span>
+      </div>
+    </div>
+    <div class="cat-block reveal">
+      <div class="cat-head">
+        <span class="cat-name">Combos</span>
+        <span class="cat-line"></span>
+      </div>
+      <div class="chips">
+        <span class="chip featured">Corte + Barba</span>
+        <span class="chip featured">Corte + Selagem</span>
+        <span class="chip featured">Corte + Couver Pintura</span>
+        <span class="chip featured">Combo Completo</span>
+      </div>
+    </div>
+    <div class="servicos-cta reveal">
+      <p class="servicos-cta-text">Confira valores, disponibilidade e agende seu horário direto pelo Booksy.</p>
+      <a href="https://booksy.com/pt-br/125221_barbearia-nocaute_barbearias_392563_goiania" target="_blank" class="servicos-cta-btn">Ver Preços & Agendar</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROFISSIONAIS -->
+<section id="profissionais">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">// Quem Faz</p>
+      <h2 class="section-title">A Equipe</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="profissionais-grid reveal">
+      <div class="profissional-card">
+        <div class="profissional-img-placeholder">
+          <img src="https://res.cloudinary.com/dnnnn7njk/image/upload/v1777578776/foto_danillo_swnnhd.png" alt="Danillo" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="profissional-info">
+          <div>
+            <p class="profissional-nome">Danillo</p>
+            <p class="profissional-cargo">Barbeiro Especialista</p>
+          </div>
+          <div class="profissional-badge">D</div>
+        </div>
+      </div>
+      <div class="profissional-card">
+        <div class="profissional-img-placeholder">
+          <span class="profissional-placeholder-icon">✂️</span>
+        </div>
+        <div class="profissional-info">
+          <div>
+            <p class="profissional-nome">Matheus</p>
+            <p class="profissional-cargo">Barbeiro Especialista</p>
+          </div>
+          <div class="profissional-badge">M</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section id="galeria">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">// O Ambiente</p>
+      <h2 class="section-title">Galeria</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="galeria-grid reveal">
+      <div class="galeria-item g-vid">
+        <video src="https://res.cloudinary.com/dnnnn7njk/video/upload/v1785525787/videobarbearia_xb1aic.mp4" autoplay muted loop playsinline></video>
+        <span class="g-vid-badge">▶ Nocaute em ação</span>
+      </div>
+      <div class="galeria-item g-a">
+        <img src="https://res.cloudinary.com/dnnnn7njk/image/upload/v1785524293/fe1bbacb-c3be-42df-8280-fab4e2e67b95.png" alt="Barbeiro fazendo acabamento" loading="lazy">
+      </div>
+      <div class="galeria-item g-b">
+        <img src="https://res.cloudinary.com/dnnnn7njk/image/upload/v1785524279/577154d5-0d6f-4e18-996a-900305292e5e.png" alt="Acabamento de barba na navalha" loading="lazy">
+      </div>
+      <div class="galeria-item g-c">
+        <img src="https://res.cloudinary.com/dnnnn7njk/image/upload/v1785524262/ba5fa7c9-9d1a-403a-9bf6-11d6230d53a5.png" alt="Degradê na lateral" loading="lazy">
+      </div>
+      <div class="galeria-item g-d">
+        <img src="https://res.cloudinary.com/dnnnn7njk/image/upload/v1785524245/e313b009-745d-48c4-9ba5-cae2368fa6e3.png" alt="Cliente de perfil com barba" loading="lazy">
+      </div>
+      <div class="galeria-item g-e">
+        <img src="https://res.cloudinary.com/dnnnn7njk/image/upload/v1785524225/c6b61159-a2a7-4f9f-bacd-200b09ce95d4.png" alt="Close de perfil antes do corte" loading="lazy">
+      </div>
+      <div class="galeria-item g-f">
+        <img src="https://res.cloudinary.com/dnnnn7njk/image/upload/v1785524445/68a846f3-ff1a-442c-8299-b09ec8e06708.png" alt="Cliente na cadeira durante atendimento" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENDAR -->
+<section id="agendar">
+  <div class="container">
+    <p class="section-label">// Booksy</p>
+    <h2 class="section-title">Marque Seu Horário</h2>
+    <div class="section-divider"></div>
+    <p class="agendar-desc">Sem fila. Sem espera. E o nocaute é visual.</p>
+    <a href="https://booksy.com/pt-br/125221_barbearia-nocaute_barbearias_392563_goiania" target="_blank" class="agendar-btn">Agendar pelo Booksy</a>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">// Localização & Contato</p>
+      <h2 class="section-title">Nos Encontre</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="contato-grid">
+      <div class="reveal">
+        <div class="horario-strip">
+          <div class="horario-item">
+            <span class="horario-dia">Seg — Sex</span>
+            <span class="horario-hora">09h — 20h</span>
+          </div>
+          <div class="horario-item">
+            <span class="horario-dia">Sábado</span>
+            <span class="horario-hora">09h — 16h</span>
+          </div>
+          <div class="horario-item">
+            <span class="horario-dia">Domingo</span>
+            <span class="horario-hora">Fechado</span>
+          </div>
+        </div>
+
+        <div class="contato-info-item">
+          <div class="contato-icon">📍</div>
+          <div>
+            <p class="contato-label">Endereço</p>
+            <a class="contato-value" href="https://maps.google.com/?q=Av.+T-8,+657+Setor+Bueno+Goiânia" target="_blank">
+              Av. T-8, 657 — St. Bueno<br>Goiânia — GO, 74210-270
+            </a>
+          </div>
+        </div>
+
+        <div class="contato-info-item">
+          <div class="contato-icon">📞</div>
+          <div>
+            <p class="contato-label">Telefone / WhatsApp</p>
+            <a class="contato-value" href="https://wa.me/5562982934041" target="_blank">(62) 98293-4041</a>
+          </div>
+        </div>
+
+        <div class="contato-info-item">
+          <div class="contato-icon">📸</div>
+          <div>
+            <p class="contato-label">Instagram</p>
+            <a class="contato-value" href="https://instagram.com/barbearianocaute_" target="_blank">@barbearianocaute_</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="mapa-container">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3822.8!2d-49.274!3d-16.698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935ef1c7b2e0b4c3%3A0x1a2b3c4d5e6f7890!2sAv.%20T-8%2C%20657%20-%20St.%20Bueno%2C%20Goi%C3%A2nia%20-%20GO!5e0!3m2!1spt-BR!2sbr!4v1"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-trust reveal">
+      <div class="trust-item">
+        <span class="trust-stars">★★★★★</span>
+        <span class="trust-score">5,0</span>
+        <span class="trust-label">Booksy</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-stars">★★★★★</span>
+        <span class="trust-score">5,0</span>
+        <span class="trust-label">Google</span>
+      </div>
+      <div class="trust-badge">
+        <span class="trust-badge-seal">✦</span>
+        <span class="trust-badge-text">Barbearia Recomendada pelo Booksy</span>
+      </div>
+    </div>
+    <div class="footer-inner">
+      <span class="footer-brand">Barbearia Nocaute</span>
+      <div class="footer-social">
+        <a href="https://instagram.com/barbearianocaute_" target="_blank">@barbearianocaute_</a>
+        <a href="https://wa.me/5562982934041" target="_blank">WhatsApp</a>
+        <a href="https://booksy.com/pt-br/125221_barbearia-nocaute_barbearias_392563_goiania" target="_blank">Booksy</a>
+      </div>
+      <span class="footer-copy">© 2025 Barbearia Nocaute</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── SCROLL REVEAL ──
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // ── NAV SCROLL ──
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) {
+      navbar.style.borderBottomColor = 'rgba(255,255,255,0.1)';
+    } else {
+      navbar.style.borderBottomColor = 'rgba(255,255,255,0.06)';
+    }
+  });
+
+  // ── MOBILE MENU ──
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    if (links.style.display === 'flex') {
+      links.style.display = 'none';
+    } else {
+      links.style.cssText = `
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 60px; left: 0; right: 0;
+        background: rgba(0,0,0,0.97);
+        padding: 2rem;
+        gap: 1.5rem;
+        z-index: 99;
+        border-bottom: 1px solid #333;
+      `;
+      links.querySelectorAll('a').forEach(a => {
+        a.style.fontSize = '0.8rem';
+        a.addEventListener('click', () => links.style.display = 'none');
+      });
+    }
+  }
+</script>
+</body>
+</html>
