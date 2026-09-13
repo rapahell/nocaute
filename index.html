@@ -890,11 +890,17 @@
 
     .servicos-cta { flex-direction: column; align-items: flex-start; }
 
-    /* Fachada: no mobile usa a versão já recortada em retrato */
+    /* Fachada no mobile: imagem inteira (contain) como faixa no topo,
+       sem cortar o letreiro; fundo preto preenche o resto */
     .hero-fachada {
-      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.85) 100%),
-                  url('https://res.cloudinary.com/dnnnn7njk/image/upload/v1789310100/header_mobile_hxq7jn.jpg') center/cover no-repeat;
+      background: url('https://res.cloudinary.com/dnnnn7njk/image/upload/v1789310100/header_mobile_hxq7jn.jpg') top center/contain no-repeat;
+      opacity: 1;
     }
+    /* posiciona a tagline + botão logo abaixo da faixa da imagem.
+       a imagem é ~0.637 da largura em altura; empurramos o conteúdo além disso */
+    #hero { align-items: flex-start; }
+    .hero-content { margin-top: calc(63.7vw + 3rem); }
+    .hero-scroll { display: none; }
 
     .galeria-grid {
       grid-template-columns: 1fr 1fr;
