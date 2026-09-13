@@ -890,16 +890,28 @@
 
     .servicos-cta { flex-direction: column; align-items: flex-start; }
 
-    /* Fachada no mobile: imagem inteira (contain) como faixa no topo,
-       sem cortar o letreiro; fundo preto preenche o resto */
+    /* Hero no mobile: nav no topo, imagem inteira como faixa, conteúdo abaixo.
+       Tudo em fluxo normal para a altura ajustar sozinha (sem vão preto). */
+    #hero {
+      height: auto;
+      min-height: auto;
+      display: block;
+      padding-top: 72px;
+      padding-bottom: 3.5rem;
+    }
+    .hero-bg { display: none; }
     .hero-fachada {
+      position: relative;
+      inset: auto;
+      width: 100%;
+      height: 63.7vw;
       background: url('https://res.cloudinary.com/dnnnn7njk/image/upload/v1789310100/header_mobile_hxq7jn.jpg') top center/contain no-repeat;
       opacity: 1;
     }
-    /* posiciona a tagline + botão logo abaixo da faixa da imagem.
-       a imagem é ~0.637 da largura em altura; empurramos o conteúdo além disso */
-    #hero { align-items: flex-start; }
-    .hero-content { margin-top: calc(63.7vw + 3rem); }
+    .hero-content {
+      position: relative;
+      margin-top: 2.5rem;
+    }
     .hero-scroll { display: none; }
 
     .galeria-grid {
