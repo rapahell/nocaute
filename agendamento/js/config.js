@@ -11,13 +11,13 @@
                       NUNCA vai aqui).
    ════════════════════════════════════════════════════════════ */
 window.NC_CONFIG = {
-  modo: 'demo',
-  supabaseUrl: '',          // ex.: https://xxxx.supabase.co
-  supabaseAnonKey: '',
+  modo: 'supabase',
+  supabaseUrl: 'https://vwpahkckyaclntbpznle.supabase.co',
+  supabaseAnonKey: 'sb_publishable_QrbPvqV7kU41OMeV0JHzvg_uJGTdT64',
 
   fuso: 'America/Sao_Paulo',
   offset: '-03:00',
-  siteUrl: '../',           // site institucional (logo e "Voltar ao site")
+  siteUrl: 'https://www.barbearianocaute.com.br/',   // site institucional (logo e "Voltar ao site")
   whatsapp: '5562982934041',
   instagram: 'barbearianocaute_',
   endereco: 'Av. T-8, 657, Setor Bueno, Goiânia, GO, 74210-270',
